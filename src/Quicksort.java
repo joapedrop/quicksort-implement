@@ -1,9 +1,9 @@
+import java.util.Scanner;
+
 public class Quicksort {
+    static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
-      int[] vetor = gerarVetor(10);
-        printar(vetor);
-        quicksortRevert(vetor, 0, vetor.length-1);
-        printar(vetor);
+      ola();
 
     
     }
@@ -13,6 +13,61 @@ public class Quicksort {
             vetor[i] = (int) (Math.random() * 100);
         }
         return vetor;
+    }
+    static int lerValor(){
+        return sc.nextInt();
+    }
+    static int[] lerVetor(int tamanho){
+        int[] vetor = new int[tamanho];
+        for (int i = 0; i < vetor.length; i++) {
+            vetor[i] = sc.nextInt();
+        }
+        return vetor;
+    }
+    public static void ola(){
+        System.out.println("--------------------------------");
+        System.out.println("[0] numero random");
+        System.out.println("[1] vc escolhe");
+        int escolhe = lerValor();
+        if(escolhe == 1){
+            System.out.println("tamanho vetor");
+            int tamanho  = lerValor();
+            if(tamanho <=0){
+                System.out.println("tem que ser maior que zero");
+                ola();
+                
+            }
+            int[] vetor = lerVetor(tamanho);
+            System.out.println("----------");
+            System.out.println("[0] ordem reversa");
+            int escolha = sc.nextInt();
+            if(escolha == 0){
+                quicksortRevert(vetor, 0, vetor.length-1);
+            }else{
+                quicksort(vetor, 0, vetor.length-1);
+            }
+            printar(vetor);
+        }else if(escolhe == 0){
+            System.out.println("tamanho vetor");
+            int tamanho = lerValor();
+            if(tamanho <= 0){
+                System.out.println("tem que ser maior que zero");
+                ola();
+            }
+            int[] vetor = gerarVetor(tamanho);
+            System.out.println("[0] reversa");
+            System.out.println("[1] normal");
+            int escolha = lerValor();
+            if(escolha == 0){
+                quicksortRevert(vetor, 0, vetor.length-1);
+            }
+            if(escolha == 1){
+                quicksort(vetor, 0, vetor.length-1);
+            }else{
+                System.out.println("escolha invalida");
+            }
+            printar(vetor);
+        }
     }
     static void printar(int[] vetor) {
         for (int i = 0; i < vetor.length; i++) {
